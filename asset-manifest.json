@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/infinite-scroll-image-viewer/static/css/main.bd007ae4.css",
+    "main.js": "/infinite-scroll-image-viewer/static/js/main.d7a542d2.js",
+    "index.html": "/infinite-scroll-image-viewer/index.html",
+    "main.bd007ae4.css.map": "/infinite-scroll-image-viewer/static/css/main.bd007ae4.css.map",
+    "main.d7a542d2.js.map": "/infinite-scroll-image-viewer/static/js/main.d7a542d2.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bd007ae4.css",
+    "static/js/main.d7a542d2.js"
+  ]
+}
