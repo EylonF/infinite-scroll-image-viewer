@@ -7,7 +7,7 @@ import { AppFooter } from "./cmps/AppFooter.jsx";
 export class RootCmp extends React.Component {
   render() {
     return (
-      <section className="main-container">
+      <section>
         <main>
           <Switch>
             {routes.map((route) => (

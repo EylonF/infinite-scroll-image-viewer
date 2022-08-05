@@ -1,0 +1,39 @@
+.search-bar {
+    background-color: white;
+    opacity: 90%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 75px;
+    width: 100%;
+    z-index: 10;
+    transition: 0.25s;
+    box-shadow: 0 4px 6px -4px rgb(0 0 0 / 8%);
+
+    &.big {
+        transition: 0.25s;
+        height: 175px;
+    }
+}
+.input-container {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    padding-right: 25px;
+
+    .Mui-focused {
+        background-color: #fafafa;
+    }
+    .MuiAutocomplete-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+        border-color: rgba(0, 0, 0, 0.8);
+        border-width: 1px;
+    }
+    .MuiFormLabel-root {
+        &.Mui-focused {
+            color: rgba(0, 0, 0, 0.8);
+            background-color: #fff;
+            padding: 0px 4px;
+            border-radius: 4px;
+        }
+    }
+}

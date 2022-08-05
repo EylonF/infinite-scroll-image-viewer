@@ -1,32 +1,38 @@
 import * as React from "react";
-import { AppHeader } from "../cmps/AppHeader.jsx";
+
+import { SearchBar } from "../cmps/SearchBar.jsx";
 import { imageService } from "../services/image.service.js";
 import ImagePreview from "../cmps/ImagePreview.jsx";
 
 function ImageGallery() {
   const [data, setPhotosResponse] = React.useState(null);
+  const [searchValue, setSearchValue] = React.useState(null);
 
   React.useEffect(() => {
-    console.log("mounted");
     async function fetchData() {
-      const response = await imageService.getRandomImages();
+      const response = searchValue
+        ? await imageService.getImages(searchValue)
+        : await imageService.getRandomImages();
+      console.log("searchValue", searchValue);
       setPhotosResponse(response);
     }
     fetchData();
-  }, []);
+  }, [searchValue]);
 
   if (data === null) {
-    return <div>Loading...</div>;
+    return <div className="loader main-container page">Loading...</div>;
   } else
     return (
-      <div className="image-container page">
-        <AppHeader />
+      <div className="image-gallery main-container page">
+        <SearchBar onSetSearchValue={setSearchValue} />
         {data.errors && <div>something went wrong...</div>}
         {data.response && (
-          <div className="feed">
-            {data.response.results.map((photo) => (
-              <ImagePreview photo={photo} />
-            ))}
+          <div className=" feed-container main-container full">
+            <div className="feed">
+              {data.response.results.map((photo) => (
+                <ImagePreview photo={photo} key={photo.id} />
+              ))}
+            </div>
           </div>
         )}
       </div>

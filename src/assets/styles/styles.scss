@@ -10,10 +10,9 @@
 @import "basics/base.scss";
 
 // // Components
-@import "cmps/app-header.scss";
 @import "cmps/app-footer.scss";
-@import "cmps/home-page/hero";
-
+@import "cmps/search-bar.scss";
 
 // Pages
-@import "pages/home-page.scss";
+@import "pages/image-gallery.scss";
+@import "pages/image-details.scss";
