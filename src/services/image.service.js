@@ -12,7 +12,7 @@ const api = createApi({
   accessKey: "71f3AzPpMbdMV9NavlxJr9OkqT_nVlkL5T4xX6NCowk",
 });
 
-async function getImages(value, page = 1, perPage = 30) {
+async function getImages(value, page, perPage = 30) {
   try {
     const res = await api.search.getPhotos({
       query: value,
