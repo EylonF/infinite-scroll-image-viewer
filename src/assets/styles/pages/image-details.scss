@@ -1,6 +1,91 @@
 .image-details {
-    .user-img {
-        width: 80px;
-        height: 80px;
+    .MuiButton-text {
+        color: $clr1;
+        font-size: 24px;
+        width: fit-content;
+        padding: 6px 0px;
+        margin-bottom: 30px;
+    }
+    .img-header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+
+        .img-resolution {
+            padding: 6px 0px;
+        }
+        .img-by {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 20px;
+            padding: 6px 0px;
+            text-transform: capitalize;
+        }
+        h2 {
+            margin: 0;
+        }
+        .user-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 100%;
+        }
+    }
+    .img {
+        max-width: 100%;
+        height: auto;
+    }
+    .img-info {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin: 6px 0px 40px;
+        .info-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 30px;
+        }
+        .info-headers {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 70%;
+        }
+        .MuiButton-contained {
+            min-width: 200px;
+            font-size: 18px;
+            background-color: $clr1;
+        }
+    }
+}
+@include for-mobile-layout {
+    .image-details {
+        .MuiButton-text {
+            margin-bottom: 15px;
+            // padding: 0;
+        }
+        .img-header {
+            .img-by {
+                gap: 10px;
+            }
+        }
+        .img-info {
+            text-align: center;
+            .info-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .info-headers {
+                max-width: 100%;
+            }
+        }
+        .btn-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
     }
 }

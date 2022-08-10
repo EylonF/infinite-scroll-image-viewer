@@ -1,6 +1,6 @@
 /* Media queries Breakpoint mixins */
 @mixin for-mobile-layout {
-  @media (max-width: $padded-break-narrow) {
+  @media (max-width: $padded-break-normal) {
     @content;
   }
 }
@@ -38,6 +38,12 @@
     minmax($layoutPadding, 1fr)
     minmax(auto, $max)
     minmax($layoutPadding, 1fr);
+}
+@mixin mobileLayoutGTC($max) {
+  grid-template-columns:
+    $layoutPaddingNarrow
+    minmax(auto, $max)
+    $layoutPaddingNarrow;
 }
 
 /* Media  Mixins */
@@ -85,9 +91,6 @@
     object-fit: cover;
   }
 }
-
-
-
 
 // Mixin for removing hover efects on iphone screen
 @mixin hover-supported {

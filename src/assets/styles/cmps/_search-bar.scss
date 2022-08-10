@@ -36,4 +36,16 @@
             border-radius: 4px;
         }
     }
+    .MuiButton-contained {
+        background-color: $clr1;
+    }
+    .MuiButton-contained:hover {
+        background-color: $clr1;
+        -webkit-filter: brightness(90%);
+        -webkit-transition: all 0.25s ease;
+        -moz-transition: all 0.25s ease;
+        -o-transition: all 0.25s ease;
+        -ms-transition: all 0.25s ease;
+        transition: all 0.25s ease;
+    }
 }

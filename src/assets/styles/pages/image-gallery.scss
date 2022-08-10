@@ -1,7 +1,26 @@
 .image-gallery {
-    .feed-container {
-        margin-top: 75px;
+    .feed {
+        margin: 135px 0px 40px;
         padding-top: 50px;
         background-color: rgb(252, 252, 252);
+        width: 100%;
+        // display: grid;
+        // grid-template-rows: repeat(auto-fill, 400);
+        // grid-template-columns: repeat(250px, 800px);
+        .MuiGrid-root {
+            justify-content: center;
+        }
+        .bottom-page {
+            // position: fixed;
+            // bottom: 80px;
+            height: 20px;
+            width: 100%;
+        }
+        .no-imgs-msg {
+            min-height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     }
 }
