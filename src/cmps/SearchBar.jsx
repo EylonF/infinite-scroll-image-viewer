@@ -5,9 +5,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 
 export default function SearchBar({
-  onSetSearchValue,
   onSetPhotosResponse,
-  onSetPage,
   onScrollUp,
   gSearchValue,
 }) {
@@ -16,7 +14,9 @@ export default function SearchBar({
   let history = useHistory();
 
   React.useEffect(() => {
-    window.addEventListener("scroll", handleScroll, true);
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   React.useEffect(() => {

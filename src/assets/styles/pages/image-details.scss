@@ -54,10 +54,18 @@
             gap: 10px;
             max-width: 70%;
         }
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
         .MuiButton-contained {
             min-width: 200px;
             font-size: 18px;
             background-color: $clr1;
+            &.share-btn {
+                background-color: $clr2;
+            }
         }
     }
 }

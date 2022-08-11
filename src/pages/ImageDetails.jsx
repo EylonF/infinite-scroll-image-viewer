@@ -42,9 +42,11 @@ function ImageDetails() {
   } else
     return (
       <div className="image-details main-container page">
-        <Button variant="text" onClick={() => history.goBack()}>
-          {"◀ BACK"}{" "}
-        </Button>
+        <Reveal triggerOnce delay={500}>
+          <Button variant="text" onClick={() => history.goBack()}>
+            {"◀ BACK"}{" "}
+          </Button>
+        </Reveal>
         <Fade triggerOnce>
           <div className="img-header">
             {user && (
@@ -59,7 +61,6 @@ function ImageDetails() {
                     src={image.user.profile_image.medium}
                   />
                   {image.user.name}
-                  {/* <h2>{image.user.name}</h2> */}
                 </div>
               </Link>
             )}
@@ -71,19 +72,6 @@ function ImageDetails() {
         </Fade>
         <Fade triggerOnce>
           <ImagePreview img={image} imgSize="full" />
-          {/* <ProgressiveImage
-            src={image.urls.full}
-            placeholder={image.urls.small}
-          >
-            {(src, loading) => (
-              <img
-                width={image.width}
-                height={image.height}
-                className={`img${loading ? " loading" : " loaded"}`}
-                src={src}
-              />
-            )}
-          </ProgressiveImage> */}
         </Fade>
 
         <div className="img-info">
@@ -105,6 +93,19 @@ function ImageDetails() {
                 }}
               >
                 Download
+              </Button>
+              <Button
+                variant="contained"
+                onClick={async () => {
+                  if (navigator.share) imageService.shareImage(image);
+                  else
+                    navigator.clipboard.writeText(image.urls.full).then(() => {
+                      alert("Copied to clipboard");
+                    });
+                }}
+                className="share-btn"
+              >
+                Share
               </Button>
             </div>
           </div>

@@ -67,6 +67,7 @@ function ImageGallery() {
             onFetchData={fetchData}
             page={page}
             searchValue={searchValue}
+            onScrollUp={scrollUp}
           />
         )}
       </div>

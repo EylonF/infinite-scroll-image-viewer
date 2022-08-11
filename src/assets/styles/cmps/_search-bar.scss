@@ -19,7 +19,6 @@
     display: flex;
     align-items: center;
     gap: 25px;
-    padding-right: 25px;
 
     .Mui-focused {
         background-color: #fafafa;
@@ -47,5 +46,11 @@
         -o-transition: all 0.25s ease;
         -ms-transition: all 0.25s ease;
         transition: all 0.25s ease;
+    }
+}
+
+@include for-mobile-layout {
+    .input-container {
+        gap: 10px;
     }
 }

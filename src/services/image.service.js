@@ -6,6 +6,7 @@ export const imageService = {
   getImages,
   getImage,
   downloadImage,
+  shareImage,
 };
 
 const api = createApi({
@@ -19,7 +20,6 @@ async function getImages(value, page, perPage = 30) {
       page: page,
       perPage: perPage,
     });
-    console.log("res: ", res);
     return res;
   } catch (err) {
     console.log("Cannot get images:", err);
@@ -43,18 +43,27 @@ async function downloadImage(url) {
       downloadLocation: url,
     });
     saveAs(res.response.url, "image.jpg");
-    console.log("res: ", res);
-
-    // return res;
   } catch (err) {
     console.log("Cannot get image:", err);
+    throw err;
+  }
+}
+async function shareImage(img) {
+  try {
+    const res = await navigator.share({
+      title: `${img.width} × ${img.height}`,
+      text: img.description,
+      url: img.urls.full,
+    });
+    console.log("Successful share");
+  } catch (err) {
+    console.log("Error sharing:", err);
     throw err;
   }
 }
 async function getRandomImages(perPage = 30) {
   try {
     const res = await api.photos.getRandom({ count: perPage });
-    console.log("res: ", res);
     let data = {
       response: {
         results: res.response,
