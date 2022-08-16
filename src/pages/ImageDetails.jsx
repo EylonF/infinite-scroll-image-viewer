@@ -1,37 +1,29 @@
 import * as React from "react";
-import { HashRouter as Router, useParams } from "react-router-dom";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import { Fade, Reveal } from "react-awesome-reveal";
 import BeatLoader from "react-spinners/BeatLoader";
-import { useHistory } from "react-router-dom";
-import ProgressiveImage from "react-progressive-graceful-image";
+import { useHistory, useLocation } from "react-router-dom";
+import queryString from "query-string";
 
 import { imageService } from "../services/image.service.js";
 import ImagePreview from "../cmps/ImagePreview.jsx";
 
-function ImageDetails() {
+function ImageDetails({ onCloseModal }) {
   const [image, setImage] = React.useState(null);
   const [user, setUser] = React.useState(null);
-  const { imageId } = useParams();
   let history = useHistory();
+  let location = useLocation();
 
   React.useEffect(() => {
+    const { elementId } = queryString.parse(location.search);
     async function fetchData() {
-      const response = await imageService.getImage(imageId);
+      const response = await imageService.getImage(elementId);
       setImage(response);
       setUser(response.user);
     }
     fetchData();
-    scrollUp();
   }, []);
-
-  const scrollUp = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
 
   if (image === null) {
     return (
@@ -43,7 +35,13 @@ function ImageDetails() {
     return (
       <div className="image-details main-container page">
         <Reveal triggerOnce delay={500}>
-          <Button variant="text" onClick={() => history.goBack()}>
+          <Button
+            variant="text"
+            onClick={() => {
+              history.goBack();
+              onCloseModal();
+            }}
+          >
             {"◀ BACK"}{" "}
           </Button>
         </Reveal>

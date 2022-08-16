@@ -5,6 +5,7 @@ import queryString from "query-string";
 
 import SearchBar from "../cmps/SearchBar.jsx";
 import InfiniteScrollFeed from "../cmps/InfiniteScrollFeed.jsx";
+import ImgDetailsModal from "../cmps/ImgDetailsModal.jsx";
 
 import { imageService } from "../services/image.service.js";
 
@@ -13,18 +14,22 @@ function ImageGallery() {
   const [data, setPhotosResponse] = React.useState(null);
   const [searchValue, setSearchValue] = React.useState(null);
   const [page, setPage] = React.useState(1);
+  const [modalIsOpen, setIsOpen] = React.useState(false);
 
   React.useEffect(() => {
-    let { searchStr } = queryString.parse(location.search);
-    searchStr = searchStr === "undefined" ? null : searchStr;
+    let { searchStr, elementId } = queryString.parse(location.search);
+    searchStr = !searchStr || searchStr === "undefined" ? null : searchStr;
+    if (elementId && !data) setIsOpen(true);
+    if (!data || (!elementId && searchStr !== searchValue))
+      fetchData(searchStr, 1);
     setSearchValue(searchStr);
-    fetchData(searchStr, 1);
   }, [location]);
 
   const fetchData = async (value = searchValue, p = page) => {
     const response = value
       ? await imageService.getImages(value, p)
       : await imageService.getRandomImages();
+    console.log("response", response);
     if (!data || value !== searchValue) setPhotosResponse(response);
     else {
       setPhotosResponse({
@@ -45,6 +50,14 @@ function ImageGallery() {
     });
   };
 
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
   if (data === null) {
     return (
       <div className="loader">
@@ -59,16 +72,24 @@ function ImageGallery() {
           onSetPage={setPage}
           onScrollUp={scrollUp}
           gSearchValue={searchValue}
+          modalIsOpen={modalIsOpen}
+          onCloseModal={closeModal}
         />
         {data.errors && <div>something went wrong...</div>}
         {data.response && (
-          <InfiniteScrollFeed
-            data={data}
-            onFetchData={fetchData}
-            page={page}
-            searchValue={searchValue}
-            onScrollUp={scrollUp}
-          />
+          <React.Fragment>
+            <InfiniteScrollFeed
+              data={data}
+              onFetchData={fetchData}
+              searchValue={searchValue}
+              onScrollUp={scrollUp}
+              onOpenModal={openModal}
+            />
+            <ImgDetailsModal
+              modalIsOpen={modalIsOpen}
+              onCloseModal={closeModal}
+            />
+          </React.Fragment>
         )}
       </div>
     );

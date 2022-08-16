@@ -2,6 +2,7 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import routes from "./routes.js";
 
+import ImageGallery from "./pages/ImageGallery.jsx";
 import { AppFooter } from "./cmps/AppFooter.jsx";
 
 export class RootCmp extends React.Component {
@@ -9,6 +10,7 @@ export class RootCmp extends React.Component {
     return (
       <section>
         <main>
+          {/* <ImageGallery /> */}
           <Switch>
             {routes.map((route) => (
               <Route
